@@ -13,7 +13,7 @@ def get_user_choice():
     while True:
         user_choice = input("\nRock Paper Scissors:")
 
-        if type(user_choice) == 'str' and user_choice.lower() in choices:
+        if isinstance(user_choice,str) == True and user_choice.lower() in choices:
             return choices.index(user_choice.lower())
         
         elif user_choice == 'quit':
@@ -28,8 +28,13 @@ def get_winner(computer_choice,user_choice):
         print('You won!')
     elif res == 0:
         print('It is a tie')
-    elif res == -1:
+    elif res == 2:
         print('You lost')
 
             
+def play():
+    computer_choice = get_computer_choice()
+    user_choice = get_user_choice()
+    get_winner(computer_choice,user_choice)
 
+play()
