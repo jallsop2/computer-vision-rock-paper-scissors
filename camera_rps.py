@@ -1,7 +1,13 @@
+import warnings
 import cv2
+import os
+os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3' 
 from keras.models import load_model
+
 import numpy as np
 import random
+import time
+
 #import tensorflow as tf
 
 
@@ -16,8 +22,24 @@ def get_user_choice():
     #session = tf.Session(config=config)
 
     model = load_model('keras_model.h5',compile = False)
+
     cap = cv2.VideoCapture(0)
     data = np.ndarray(shape=(1, 224, 224, 3), dtype=np.float32)
+
+    tic = time.time()
+    print('\n\n\nRock')
+        
+    while True:
+        toc = time.time()
+        if toc - tic >= 1:
+            print('\nPaper')
+            break
+    while True:
+        toc = time.time()
+        if toc - tic >= 2:
+            print('\nScissors')
+            break
+
 
 
     ret, frame = cap.read()
@@ -37,6 +59,11 @@ def get_user_choice():
 
 def get_winner(computer_choice,user_choice):
     print(user_choice,computer_choice)
+
+    if user_choice == 3:
+        print("You didn't show anything!" )
+        return
+
     res = (user_choice - computer_choice)%3
     if res == 1:
         print('You won!')
