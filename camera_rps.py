@@ -1,4 +1,5 @@
 import cv2
+import sys
 
 import os
 os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3' 
@@ -20,12 +21,15 @@ def get_computer_choice():
     computer_choice = random.choice(range(0,3))
     return computer_choice
 
-def get_user_choice():
+def get_user_choice(switch):
 
+    if switch == 1:
 
-    cap = cv2.VideoCapture(0)
-    data = np.ndarray(shape=(1, 224, 224, 3), dtype=np.float32)
+        go = input('\nDo you want to continue? (y/n):  ')
 
+        if go == 'n':
+            sys.exit()
+    
     tic = time.time()
     print('\n3')
         
@@ -44,6 +48,8 @@ def get_user_choice():
         if toc - tic >= 3:
             break
 
+    cap = cv2.VideoCapture(0)
+    data = np.ndarray(shape=(1, 224, 224, 3), dtype=np.float32)
     ret, frame = cap.read()
     resized_frame = cv2.resize(frame, (224, 224), interpolation = cv2.INTER_AREA)
     image_np = np.array(resized_frame)
@@ -64,7 +70,7 @@ def get_winner(computer_choice,user_choice):
 
 
     if user_choice == 3:
-        print("You didn't show anything!" )
+        print("\nYou didn't show anything!" )
         return -1
     
     else:
@@ -79,20 +85,20 @@ def get_winner(computer_choice,user_choice):
             
 def play():
 
+    switch = 0
+
     user_score = 0
     computer_score = 0
 
     while True:
 
-        print('\n The score is:')
-        print(f'\n Player {user_score} : {computer_score} Computer')
-
-
         computer_choice = get_computer_choice()
 
-        user_choice = get_user_choice()
+        user_choice = get_user_choice(switch)
         
         res = get_winner(computer_choice,user_choice)
+
+        switch = 1
 
         if res == 1:
             print('\nYou get a point!')
@@ -103,6 +109,9 @@ def play():
             print('\nThe computer got a point!')
             computer_score += 1
         
+        print('\n The score is:')
+        print(f'\n Player {user_score} : {computer_score} Computer')
+
         if user_score == 3:
             print('\nCongratulations, you won!')
             break
