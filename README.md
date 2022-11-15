@@ -1,6 +1,6 @@
 # Rock Paper Scissors Computer Vision Project
 
-The aim of theis project is to create a program to allow me to play rock paper scissors against the computer, using my webcam.
+The aim of this project is to create a program to allow me to play rock paper scissors against the computer, using my webcam.
 
 ## Milestone 2
 I created the computer vision model to detect whether I am signing rock, paper, scissors or nothing using the webcam.
